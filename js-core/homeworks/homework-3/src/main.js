@@ -63,13 +63,17 @@ console.log(arr);
 */
 
 function simpleObjectGenerator(one, two, three) {
-  const obj = {
-    arg1:one,
-    arg2:two,
-    arg3:three
-  }
-  return obj;
+  let param1 = one;
+  let param2 = two;
+  let param3 = three;
 
+  const obj = {
+    argument1:param1,
+    argument2:param2,
+    argument3:param3
+  }
+
+  return obj;
 }
 
 console.log(simpleObjectGenerator('protocol', { url: '22' }, 8000));
@@ -128,21 +132,23 @@ console.log(myName);
 */
 
 function fizzBuzz(num) {
+   /* Ваш код здесь */
+  let fizz = ``;
+  let buzz = ``;
+  let strFizzBuzz = null;
 
-  /* Ваш код здесь */
-  let result = null;
-  if(num%3!=0 && num%5!=0){
-    result = num;
-  }else if(num%3==0 && num%5!=0){
-    result = `Fizz`;
-  }else if(num%3!=0 && num%5==0){
-    result = 'Buzz';
-  }else if(num%3==0 && num%5==0){
-    result = 'FizzBuzz';
+  if(num%3==0){
+    fizz = `Fizz`;
   }
-
-  console.log(result);
-  
+  if(num%5==0){
+    buzz = `Buzz`;
+  }
+  if(num%3!=0 && num%5!=0){
+    strFizzBuzz = num;
+  }else{
+    strFizzBuzz = `${fizz}${buzz}`;
+  }
+  return strFizzBuzz; 
 }
 
 fizzBuzz(1); // 1
