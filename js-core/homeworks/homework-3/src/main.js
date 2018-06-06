@@ -136,16 +136,16 @@ function fizzBuzz(num) {
   let fizz = ``;
   let buzz = ``;
   let strFizzBuzz = null;
-
-  if(num%3==0){
-    fizz = `Fizz`;
-  }
-  if(num%5==0){
-    buzz = `Buzz`;
-  }
+  
   if(num%3!=0 && num%5!=0){
     strFizzBuzz = num;
   }else{
+    if(num%3==0){
+      fizz = `Fizz`;
+    } 
+    if(num%5==0){
+      buzz = `Buzz`;
+    }
     strFizzBuzz = `${fizz}${buzz}`;
   }
   return strFizzBuzz; 
