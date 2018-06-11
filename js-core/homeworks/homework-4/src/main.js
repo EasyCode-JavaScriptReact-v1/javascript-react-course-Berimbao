@@ -41,13 +41,13 @@ console.log(typeOfArgument(obj));
  */
 
 function numbersBetween(a, b) {
-	const min = Math.min(a,b);
-	const max = Math.max(a,b);
+	let min = Math.min(a, b);
+	let max = Math.max(a, b);
 	let arr = [];
-	let count = 0;
-	for(let i = min;i<=max;i++){
-		arr[count]=i;
-		count++;
+	let i = 0;
+	for(min; min <= max; min++){
+		arr[i] = min;
+		i++;
 	}
 	return arr;
 }
@@ -68,21 +68,20 @@ console.log(numbersBetween(10, 12));
 
 function FizzBuzz(number) {
 		let result = ``;
-		if(number%3!=0 && number%5!=0){
+		if(number %3 == 0){
+			result = `${result}Fizz`;	
+		}
+		if(number % 5 == 0){
+			result = `${result}Buzz`;
+		}
+		if(result.length===0){
 			result = number;
-		}else{
-			if(number%3==0){
-				result = `Fizz`;	
-			}
-			if(number%5==0){
-				result = `${result}Buzz`;
-			}
 		}
 		console.log(result);
 }
 
 function fizzBuzz100(number) {
-		for(let i = number;i<=100;i++){
+		for(let i = number; i <= 100; i++){
 			FizzBuzz(i);
 		}
 }
@@ -100,8 +99,8 @@ let arr = [1, null, undefined, 'str', {}, [], function() {}];
 
 function typesOfElements(data){
 		let arr = [];
-		for(let i = 0;i<data.length;i++){
-			arr[i]=typeof data[i];
+		for(let i = 0; i < data.length; i++){
+			arr[i] = typeof data[i];
 		}
 		return arr;
 }
@@ -124,9 +123,10 @@ let array = Array.from({length: 35},
 
 
 function solution(arr) {
-    for(let i = 0; i<arr.length;i++){
-        if(isNaN(arr[i].age)){
-            arr[i][`unknownAge`]=true;          
+    for(let i = 0; i < arr.length; i++){
+		let current_element = arr[i];
+        if(isNaN(current_element.age)){
+            current_element[`unknownAge`] = true;          
         }  
     }
     return unknownAgeArr(arr);
@@ -135,9 +135,10 @@ function solution(arr) {
 function unknownAgeArr(arr){
     let result = [];
     let count = 0;
-    for(let i = 0;i<arr.length;i++){
-        if(arr[i].unknownAge){
-            result[count]=arr[i];
+    for(let i = 0; i < arr.length; i++){
+		let current_element = arr[i];
+        if(current_element.unknownAge){
+            result[count] = current_element;
             count++;
         }
     }
