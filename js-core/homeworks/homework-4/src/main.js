@@ -17,11 +17,7 @@ function typeOfArgument(data){
 	}else if(typeof data === 'function'){
 		return false;
 	}else if(typeof data === 'string'){
-		if(data.length!=10){
-			return `длина вашей строки: ${data.length}`;
-		}else{
-			return `you win`;
-		}
+		return data.length!=10 ? `длина вашей строки: ${data.length}`:`you win`;
 	}
 }
 
@@ -30,7 +26,7 @@ const str = `asdfasdfasd`;
 const num = 11;
 const obj = {param1:1,param2:2};
 
-console.log(typeOfArgument(func));
+console.log(typeOfArgument(obj));
 
 /*
 *
