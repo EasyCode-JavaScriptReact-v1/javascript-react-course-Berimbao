@@ -62,12 +62,35 @@ console.log(moveZeroToEnd(arr2));
  */
 
 function minimalNumber(arr) {
-
+	let min1 = arr[0];
+	let min2;
+	for(let i = 0; i<arr.length; i++){
+		let elem = arr[i];
+		
+		if(min1>elem){
+			min1 = elem;			
+		}
+		console.log(`min1 - ${min1}`);
+	}
+	for(let i = 0; i<arr.length; i++){
+		let elem = arr[i];
+		if(i != arr.indexOf(min1)){
+			min2 = elem;
+			if(min2>elem){
+				min2 = elem;
+			}			
+		}
+		console.log(`i - ${i}`);
+		console.log(`arr.indexOf(min1) - ${arr.indexOf(min1)}`);
+		console.log(`min2 - ${min2}`);
+	}
+	return min1+min2;
 }
 
-minimalNumber([20,200,10,25,15]);
-
-//console.log(minimalNumber([20,200,10,25,15]));
+//console.log(minimalNumber([10,20,30,1,31,11,10]));
+console.log(minimalNumber([-1,0,25]));
+//console.log(minimalNumber([-4,-10,25,10]));
+// console.log(minimalNumber([0,200,10,25,15]));
 
 /*
  3. Напишите функцию которая меняет местами имя и фамилию
@@ -129,26 +152,23 @@ function random(arr) {
 		let elemPlusTwo = arr[i+2];		
 		let sum = (elemPlusOne-elem);
 		if(elemPlusOne+sum == elemPlusTwo){
-			result = sum;
-			break;
-		}
-	}
-	for(let i = 0; i < arr.length; i++){
-		let elem = arr[i];
-		let elemPlusOne = arr[i+1];		
-		if(i==0){
-			if(elem-result>0){
-				result = elem-result;
-				break;
+			for(let i = 0; i < arr.length; i++){
+				let elem = arr[i];
+				let elemPlusOne = arr[i+1];		
+				if(i==0){
+					if(elem-sum>0){
+						result = elem-sum;
+						break;
+					}
+				}
+				if(elem+sum != elemPlusOne){
+					result = elem+sum;
+					break;
+				}	
 			}
 		}
-		if(elem+result != elemPlusOne){
-			result = elem+result;
-			break;
-		}	
 	}
-	return `Array [${arr}] don't contain ${result}`;
-	
+	return `Array [${arr}] don't contain ${result}`;	
 }
 
 console.log(random([1, 3, 5, 9]));
@@ -167,4 +187,18 @@ console.log(random([4, 6, 8, 10]));
   [25,10,[10,[15]]] => [25,10,10,15]
  */
 
-function openBraces(arr) {}
+function openBraces(arr) {
+	let resultArray = [];
+	if(Array.isArray(arr)){		
+		for(let i = 0; i<arr.length; i++){
+			let elem = arr[i];			
+			openBraces(elem);
+			resultArray.push(elem);
+		}
+	}
+//	return `resultArray:[${resultArray}]`;
+	return resultArray;
+}
+
+console.log(openBraces([[1,2],[3,[4]],5, 10]));
+console.log(openBraces([25,10,[10,[15]]]));
