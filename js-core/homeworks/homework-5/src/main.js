@@ -65,32 +65,29 @@ function minimalNumber(arr) {
 	let min1 = arr[0];
 	let min2;
 	for(let i = 0; i<arr.length; i++){
-		let elem = arr[i];
-		
+		let elem = arr[i];		
 		if(min1>elem){
 			min1 = elem;			
 		}
-		console.log(`min1 - ${min1}`);
 	}
 	for(let i = 0; i<arr.length; i++){
 		let elem = arr[i];
 		if(i != arr.indexOf(min1)){
-			min2 = elem;
+			if(typeof min2 == "undefined"){
+				min2 = elem;
+			}		
 			if(min2>elem){
 				min2 = elem;
 			}			
 		}
-		console.log(`i - ${i}`);
-		console.log(`arr.indexOf(min1) - ${arr.indexOf(min1)}`);
-		console.log(`min2 - ${min2}`);
 	}
-	return min1+min2;
+	return `Summ of min numbers in ${arr} : ${min1+min2}`;
 }
 
-//console.log(minimalNumber([10,20,30,1,31,11,10]));
+console.log(minimalNumber([10,20,30,1,31,11,10]));
 console.log(minimalNumber([-1,0,25]));
-//console.log(minimalNumber([-4,-10,25,10]));
-// console.log(minimalNumber([0,200,10,25,15]));
+console.log(minimalNumber([-4,-10,25,10]));
+console.log(minimalNumber([0,200,10,25,15]));
 
 /*
  3. Напишите функцию которая меняет местами имя и фамилию
