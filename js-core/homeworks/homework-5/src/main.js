@@ -193,8 +193,8 @@ function openBraces(arr) {
 			resultArray.push(elem);
 		}
 	}
-//	return `resultArray:[${resultArray}]`;
-	return resultArray;
+	return `resultArray:[${resultArray}]`;
+//	return resultArray;
 }
 
 console.log(openBraces([[1,2],[3,[4]],5, 10]));
