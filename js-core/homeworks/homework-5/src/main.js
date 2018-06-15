@@ -36,18 +36,32 @@ let arr2 = [
   9
 ];
 
-function moveZeroToEnd(arr) {
+function moveZeroToEnd2(arr) {
 	let zeroArray = [];
+	let returnArray = [...arr];
+	let soughtValue = 0;
 	
-	while(arr.indexOf(0)!=-1){	
-		let zeroIndex = arr.indexOf(0);
-		let elem = arr[zeroIndex];		
+	while(returnArray.indexOf(soughtValue)){	
+		let zeroIndex = returnArray.indexOf(soughtValue);
+		let elem = returnArray[zeroIndex];		
 		zeroArray.push(elem);
-		arr.splice(zeroIndex,1);
+		returnArray.splice(zeroIndex,1);
 	}
 
-	arr = arr.concat(zeroArray);
-	return arr;
+	return returnArray.concat(zeroArray);;
+}
+
+function moveZeroToEnd(arr) {
+	let zeroArray = [];
+	let noZeroArray = [];
+
+	for(let i = 0; i< arr.length; i++){
+		let elem = arr[i];
+		elem == 0 ? zeroArray.push(elem) : noZeroArray.push(elem);
+
+	}
+
+	return noZeroArray.concat(zeroArray);;
 }
 
 console.log(moveZeroToEnd(arr1));
@@ -62,26 +76,12 @@ console.log(moveZeroToEnd(arr2));
  */
 
 function minimalNumber(arr) {
-	let min1 = arr[0];
-	let min2;
-	for(let i = 0; i<arr.length; i++){
-		let elem = arr[i];		
-		if(min1>elem){
-			min1 = elem;			
-		}
-	}
-	for(let i = 0; i<arr.length; i++){
-		let elem = arr[i];
-		if(i != arr.indexOf(min1)){
-			if(typeof min2 == "undefined"){
-				min2 = elem;
-			}		
-			if(min2>elem){
-				min2 = elem;
-			}			
-		}
-	}
-	return `Summ of min numbers in ${arr} : ${min1+min2}`;
+	let tempArray = [...arr];
+	let min_1 = Math.min(...tempArray);
+	tempArray.splice(tempArray.indexOf(min_1),1);
+	let min_2 = Math.min(...tempArray);
+
+	return min_1+min_2;
 }
 
 console.log(minimalNumber([10,20,30,1,31,11,10]));
@@ -114,6 +114,8 @@ nameShuffler('James Bond');
  */
 
 function capMe(arr) {
+	let resultArray = [];
+
 	for(let i = 0; i<arr.length; i++){
 		let elem = arr[i];
 		let elementArray = elem.toLowerCase().split('');
@@ -123,9 +125,10 @@ function capMe(arr) {
 		elementArray.unshift(firstLetter);
 		elementArray = elementArray.join('');
 
-		arr[i] = elementArray;
+		resultArray[i] = elementArray;
 	}
-	return arr
+
+	return resultArray;
 }
 
 console.log(capMe(['jo', 'nelson', 'jurie']));
@@ -147,19 +150,19 @@ function random(arr) {
 		let elem = arr[i];
 		let elemPlusOne = arr[i+1];
 		let elemPlusTwo = arr[i+2];		
-		let sum = (elemPlusOne-elem);
-		if(elemPlusOne+sum == elemPlusTwo){
+		let step = (elemPlusOne-elem);
+		if(elemPlusOne+step == elemPlusTwo){
 			for(let i = 0; i < arr.length; i++){
 				let elem = arr[i];
 				let elemPlusOne = arr[i+1];		
 				if(i==0){
-					if(elem-sum>0){
-						result = elem-sum;
+					if(elem-step>0){
+						result = elem-step;
 						break;
 					}
 				}
-				if(elem+sum != elemPlusOne){
-					result = elem+sum;
+				if(elem+step != elemPlusOne){
+					result = elem+step;
 					break;
 				}	
 			}
@@ -186,16 +189,18 @@ console.log(random([4, 6, 8, 10]));
 
 function openBraces(arr) {
 	let resultArray = [];
-	if(Array.isArray(arr)){		
-		for(let i = 0; i<arr.length; i++){
-			let elem = arr[i];			
-			openBraces(elem);
-			resultArray.push(elem);
-		}
-	}
-	return `resultArray:[${resultArray}]`;
-//	return resultArray;
+	let str = ``;
+	// if(Array.isArray(arr)){		
+	// 	for(let i = 0; i<arr.length; i++){
+	// 		let elem = arr[i];
+	// 		str = str+elem;	
+	// 		console.log(str);	
+	// 		openBraces(resultArray);			
+			
+	// 	}
+	// }
+	//return resultArray;
 }
 
 console.log(openBraces([[1,2],[3,[4]],5, 10]));
-console.log(openBraces([25,10,[10,[15]]]));
+//console.log(openBraces([25,10,[10,[15]]]));
