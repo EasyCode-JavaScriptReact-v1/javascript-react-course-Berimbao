@@ -322,7 +322,23 @@ let listOfCompanys = [
   };
 
 //console.log(countLetterA(user.name + javaScript.html));
-  
+
+//SIMPLY VERSION
+function simplyCountLetterA(str) {
+		let tempArray = str.split('');
+		return tempArray.reduce(function(newValue,value){
+			if(value==`a` ){
+				newValue++;
+			}
+			return newValue;	
+		},0)
+}
+
+console.log(simplyCountLetterA(randomString)); // 4
+console.log(simplyCountLetterA(user.name + javaScript.html)); // 3
+
+
+// HARD VERSION
   function countLetterA(str) {
 	  let result=``;
 	if(typeof str === 'object' && !Array.isArray(str)){
@@ -337,13 +353,14 @@ let listOfCompanys = [
 	return result;
   }
 
+
   function reduceResult(arr){
-	return arr.reduce(function(newValue,value){
-		if(value==`a` ){
-			newValue++;
-		}
-		return newValue;	
-	},0)
+		return arr.reduce(function(newValue,value){
+			if(value==`a` ){
+				newValue++;
+			}
+			return newValue;	
+		},0)
   }
 
   
@@ -410,21 +427,35 @@ console.log(countLetterA(user.name + javaScript.html)); // 3
    * */
   
   // Both - Java - and - Java - Script - is - programming - and - programming - OOPBased
-  
-  function wordCounter(sentence) {
+//SIMPLY VERSION
+function wordCounter(sentence) {
 	let tempArray = sentence.split(' ');
-	let result = {};
-	tempArray.forEach(function(value){
-		let currentElem = value;
-		result[value]= tempArray.reduce(function(newValue,value){
-			if(value==currentElem){
-				newValue = newValue+1;				
+	return tempArray.reduce(function(newValue,value){
+			if(value in newValue){
+				newValue[value] = newValue[value]+1;				
+			}else{
+				newValue[value] = 1;
 			}
 			return newValue;
-		},0);
-	});
-	return result;	
-  }
+	},{});
+}
+	
+// HARD VERSION	
+  // function wordCounter(sentence) {
+	// 	let tempArray = sentence.split(' ');
+	// 	let result = {};
+	// 	tempArray.forEach(function(value){
+	// 		let currentElem = value;
+	// 		result[value] = tempArray.reduce(function(newValue,value){
+	// 			if(value==currentElem){
+	// 				newValue = newValue+1;				
+	// 			}
+	// 			return newValue;
+	// 		},0);
+	// 	});
+	// 	return result;	
+	// }
+
   
   console.log(
 	wordCounter('Both Java and Java Script is programming and programming OOPBased Language'),
@@ -466,13 +497,12 @@ console.log(wordCounter('url http url www url http'));
    // верните объект, у которого ключ это _id, а значение Company
    */
   
-  function createHashTags(arr) {
-	let company={};
-	arr.forEach(function(value){
-		company[value._id]=value.company;
-	})
-	return company;
-  }
+function createHashTags(arr) {
+	return arr.reduce(function(newValue, value){
+		newValue[value._id]=value.company;
+		return newValue;
+	},{})
+}
   
 console.log(createHashTags(listOfCompanys));
   //{"584babb6eeb4137cf14c37a3":"ASIMILINE", '584babb6eeb4137cf14c37a3':'Company2', }
@@ -484,24 +514,14 @@ console.log(createHashTags(listOfCompanys));
    * Выведите уникальные значения
    *
    * */
-
   
   function uniqueElements(arr) {
-	let result = ``;
-
-	arr.forEach(function(value){
-		let currentElem = value;
-		let count = arr.reduce(function(newValue,value){
-			if(value==currentElem){
-				newValue = newValue+1;			
+		return arr.reduce(function(newValue,value){
+			if(newValue.indexOf(value)==-1){
+				newValue.push(value);
 			}
 			return newValue;
-		},0);
-		if(count==1){
-			console.log(value)
-		}
-	});
-	return result;
+		},[]);
   }
   
   //
@@ -519,6 +539,19 @@ console.log(createHashTags(listOfCompanys));
   *
   * */
 
-  function filter(arg1,arg2){
-	
-  }
+function filter(array, callback) {
+	let resultArray = [];
+	for(let i = 0; i<array.length; i++){
+		let elem = array[i];
+		if(callback(elem)){
+			resultArray.push(elem);
+		}	
+	}
+	return resultArray;
+}
+
+let arr = [1,2,3,4,5,6]
+
+console.log(filter(arr, function(number){
+	return number <3;
+}))
