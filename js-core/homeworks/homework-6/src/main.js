@@ -327,7 +327,7 @@ let listOfCompanys = [
 function simplyCountLetterA(str) {
 		let tempArray = str.split('');
 		return tempArray.reduce(function(newValue,value){
-			if(value==`a` ){
+			if(value == `a` ){
 				newValue++;
 			}
 			return newValue;	
@@ -340,7 +340,7 @@ console.log(simplyCountLetterA(user.name + javaScript.html)); // 3
 
 // HARD VERSION
 	function countLetterA(str) {
-		let result=``;
+		let result = ``;
 	if(typeof str === 'object' && !Array.isArray(str)){
 		for(key in str){
 			let tempArray = str[key].split('');
@@ -356,7 +356,7 @@ console.log(simplyCountLetterA(user.name + javaScript.html)); // 3
 
 	function reduceResult(arr){
 		return arr.reduce(function(newValue,value){
-			if(value==`a` ){
+			if(value == `a` ){
 				newValue++;
 			}
 			return newValue;	
@@ -377,13 +377,13 @@ console.log(countLetterA(user.name + javaScript.html)); // 3
 	 * */
 	
 	function reverseEachWord(str) {
-	let tempArray = str.split(' ');
-	let result = [];
-	tempArray.forEach(function(value){
-		let word = value.split('').reverse().join('');
-		result.push(word);
-	});
-	return result.join(' ');
+		let tempArray = str.split(' ');
+		let result = [];
+		tempArray.forEach(function(value){
+			let word = value.split('').reverse().join('');
+			result.push(word);
+		});
+		return result.join(' ');
 	}
 	
  console.log(reverseEachWord('You don\'t have to do anything special to begin using the DOM. Different browsers have different implementations of the DOM'));
@@ -400,14 +400,14 @@ console.log(countLetterA(user.name + javaScript.html)); // 3
 	 * */
 	
 	function reverseEachWord(str,boolean) {
-	let tempArray = str.split(' ');
-	let result = [];
-	tempArray.forEach(function(value){
-		let word = value.split('').reverse().join('');
-		result.push(word);
-	});
+		let tempArray = str.split(' ');
+		let result = [];
+		tempArray.forEach(function(value){
+			let word = value.split('').reverse().join('');
+			result.push(word);
+		});
 
-	return boolean ? result.reverse().join(' '): result.join(' ');
+		return boolean ? result.reverse().join(' '): result.join(' ');
 	}
 	
 
@@ -432,7 +432,7 @@ function wordCounter(sentence) {
 	let tempArray = sentence.split(' ');
 	return tempArray.reduce(function(newValue,value){
 			if(value in newValue){
-				newValue[value] = newValue[value]+1;				
+				newValue[value] = newValue[value] + 1;				
 			}else{
 				newValue[value] = 1;
 			}
@@ -499,7 +499,7 @@ console.log(wordCounter('url http url www url http'));
 	
 function createHashTags(arr) {
 	return arr.reduce(function(newValue, value){
-		newValue[value._id]=value.company;
+		newValue[value._id] = value.company;
 		return newValue;
 	},{})
 }
@@ -517,7 +517,7 @@ console.log(createHashTags(listOfCompanys));
 	
 	function uniqueElements(arr) {
 		return arr.reduce(function(newValue,value){
-			if(newValue.indexOf(value)==-1){
+			if(newValue.indexOf(value) == -1){
 				newValue.push(value);
 			}
 			return newValue;
@@ -541,7 +541,7 @@ console.log(createHashTags(listOfCompanys));
 
 function filter(array, callback) {
 	let resultArray = [];
-	for(let i = 0; i<array.length; i++){
+	for(let i = 0; i < array.length; i++){
 		let elem = array[i];
 		if(callback(elem)){
 			resultArray.push(elem);
@@ -553,5 +553,5 @@ function filter(array, callback) {
 let arr = [1,2,3,4,5,6]
 
 console.log(filter(arr, function(number){
-	return number <3;
+	return number < 3;
 }))
