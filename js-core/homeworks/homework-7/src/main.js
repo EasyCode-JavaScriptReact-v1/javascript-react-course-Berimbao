@@ -77,32 +77,30 @@ console.log(test.method()); //1
 let jun = {};
 
 function methodCounter(obj, name, num, fn) {
-  let returnedObj = obj;
-  returnedObj.repeatCounter = num;
-  returnedObj[name] = fn;
-  return returnedObj;
-}
-
-methodCounter(jun, 'logger', 2, sumNumber);
-
-function sumNumber(args){
-  if(jun.repeatCounter>0){
-    let tempArray=[...arguments];
-    let result = "step: "+jun.repeatCounter;
-    jun.repeatCounter --; 
-    result = result+", result: "+tempArray.reduce(function(newValue,value){
-      return newValue + value;
-    },0);  
-    return result;
-  }else{
-    return `ERROR ! add more methods`;
+  let counter = 1;
+  obj.repeatCounter = num;
+  obj[name]=function(){
+    if(counter<=num){
+      counter++ ;      
+      return fn();
+    }else{
+      return `ERROR ! add more methods`;
+    }
   }
+  return obj;
 }
-
+  
+methodCounter(jun, 'logger', 2, function(args){
+    let tempArray=[...arguments];
+    return tempArray.reduce(function(newValue,value){
+        return newValue + value;
+    },0); 
+});
 
 console.log(jun.logger(1, 2, 3, 4)); // 2, 10
 console.log(jun.logger(5, 5, 5, 5)); // 1, 20
 console.log(jun.logger(5, 5)); // ERROR ! add more methods
+
 
 //jun.addCounter(10, methodName);
 
