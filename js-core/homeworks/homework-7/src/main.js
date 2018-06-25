@@ -8,11 +8,11 @@
  * */
 
 function add(num1) {
-    return function(num2){
-        return function(num3){
-            return num1+num2+num3;
-        }
-    }
+  return function(num2) {
+    return function(num3) {
+      return num1 + num2 + num3;
+    };
+  };
 }
 
 // const addVar = add(1);
@@ -36,17 +36,16 @@ console.log(add(10)(5)(15)); // 30
  * */
 
 function patternModule() {
-    let i = 0;
-    let obj = {
-        method:function(){
-            return ++i;
-        },
-        zeroMethod:function(){
-            return i=0;
-        }  
-             
+  let i = 0;
+  let obj = {
+    method: function() {
+      return ++i;
+    },
+    zeroMethod: function() {
+      return (i = 0);
     }
-    return obj;
+  };
+  return obj;
 }
 
 // patternModule
@@ -77,30 +76,28 @@ console.log(test.method()); //1
 let jun = {};
 
 function methodCounter(obj, name, num, fn) {
-  let counter = 1;
-  obj.repeatCounter = num;
-  obj[name]=function(){
-    if(counter<=num){
-      counter++ ;      
-      return fn();
-    }else{
-      return `ERROR ! add more methods`;
+  let counter = num;
+
+  obj[name] = function(a, b, c, d) {
+    if (counter == 0) {
+      return "ERROR ! add more methods";
     }
-  }
-  return obj;
+    counter--;
+    let num1 = a || 0;
+    let num2 = b || 0;
+    let num3 = c || 0;
+    let num4 = d || 0;
+    return fn(num1, num2, num3, num4);
+  };
 }
-  
-methodCounter(jun, 'logger', 2, function(args){
-    let tempArray=[...arguments];
-    return tempArray.reduce(function(newValue,value){
-        return newValue + value;
-    },0); 
+
+methodCounter(jun, "logger", 2, function(a, b, c, d) {
+  return a + b + c + d;
 });
 
 console.log(jun.logger(1, 2, 3, 4)); // 2, 10
 console.log(jun.logger(5, 5, 5, 5)); // 1, 20
 console.log(jun.logger(5, 5)); // ERROR ! add more methods
-
 
 //jun.addCounter(10, methodName);
 
