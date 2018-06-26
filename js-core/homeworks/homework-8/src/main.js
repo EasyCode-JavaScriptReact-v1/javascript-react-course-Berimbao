@@ -33,9 +33,46 @@ console.log(stringBuffer("Привет")); // Замыкания Использ�
 
 function validBraces(str) {
   let tmpArray = str.split("");
-  let result = false;
+  let result = true
+  let result1 = false;
+  let result2 = false;
+  let result3 = false;
 
-  return result;
+  for(let i = 0; i<tmpArray.length; i++){
+    let elem = tmpArray[i];
+    if(elem=='('){
+      result1 = findBraces(tmpArray,i,')')
+      if(!result1){
+        return false
+      }
+    }
+    if(elem=='{'){
+      result2 = findBraces(tmpArray,i,'}')
+      if(!result2){
+        return false
+      }
+    }
+    if(elem=='['){
+      result3 = findBraces(tmpArray,i,']')
+      if(!result3){
+        return false
+      }
+    }
+  }
+  return result
+
+}
+
+function findBraces(arr,index,secondBraces){
+  for(let i = 0; i<arr.length; i++){
+    if(arr[index+1] == secondBraces){
+      return true;
+    }else if(arr[arr.length-(index+1)] == secondBraces){
+      return true;
+    }else{
+      return false;
+    }
+  }
 }
 
 console.log(validBraces("(){}[]")); // => returns true
