@@ -36,7 +36,7 @@ function goodDev() {
     });
   }
 
-  return needSkilsArray.map(function(value) {
+  return needSkilsArray.forEach(function(value) {
     if (skillsArray.indexOf(value) != -1) {
       console.log(`required: ${value}... success`);
     } else {
@@ -195,9 +195,8 @@ let junior = {};
 // fn.length == arguments.length
 
 function addMethod(object, name, fn) {
-  let paramCount = [...arguments].length;
-  object[name] = function(...args) {
-    if ([...args].length == paramCount) {
+  object[name] = function() {
+    if (fn.length == arguments.length) {
       return object[name];
     }
   };
