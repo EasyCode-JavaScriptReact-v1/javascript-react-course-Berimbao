@@ -8,42 +8,41 @@
  * */
 
 let developer1 = {
-  skills: ['JavaScript', 'linux', 'html', 'OOP', 'Node.js'],
-  requirements: ['Node.js', 'JavaScript', 'OOP'],
+  skills: ["JavaScript", "linux", "html", "OOP", "Node.js"],
+  requirements: ["Node.js", "JavaScript", "OOP"],
   goodDev: goodDev
 };
 let developer2 = {
   experience: [
-    { technology: 'java' },
-    { technology: 'c++' },
-    { technology: 'aws' },
-    { technology: 'docker' }
+    { technology: "java" },
+    { technology: "c++" },
+    { technology: "aws" },
+    { technology: "docker" }
   ],
-  requirements: ['java', 'json', 'c++', 'JavaScript'],
+  requirements: ["java", "json", "c++", "JavaScript"],
   goodDev: goodDev
 };
 
 function goodDev() {
-  let skillsArray =  []
+  let skillsArray = [];
   let needSkilsArray = [...this.requirements];
-  console.log('...')
-  if(this.skills){
+  console.log("...");
+  if (this.skills) {
     skillsArray = [...this.skills];
   }
-  if(this.experience){
-    skillsArray = this.experience.map(function(elem){
-        return elem=elem.technology;
-      
-    })
+  if (this.experience) {
+    skillsArray = this.experience.map(function(elem) {
+      return (elem = elem.technology);
+    });
   }
 
-  return needSkilsArray.map(function(value){
-    if(skillsArray.indexOf(value)!=-1){
-      console.log(`required: ${value}... success`)
-    }else{
-      console.log(`required: ${value}... fail`)
-    }  
-  })
+  return needSkilsArray.map(function(value) {
+    if (skillsArray.indexOf(value) != -1) {
+      console.log(`required: ${value}... success`);
+    } else {
+      console.log(`required: ${value}... fail`);
+    }
+  });
 }
 
 developer1.goodDev();
@@ -75,27 +74,24 @@ developer2.goodDev();
 
 let myObject = {
   database: [
-    { age: 100, name: 'b' },
-    { age: 15, name: 'c' },
-    { age: 25, name: 'a' }
+    { age: 100, name: "b" },
+    { age: 15, name: "c" },
+    { age: 25, name: "a" }
   ]
 };
 
-
 myObject.myFilter = function(param) {
-  let obj = {...this, database:[...this.database] };
-  return obj.database.sort(function(a,b){
-    return a[param] > b[param]
-    } 
-  );
+  let obj = { ...this, database: [...this.database] };
+  return obj.database.sort(function(a, b) {
+    return a[param] > b[param];
+  });
 };
 
 // {age:15, name:'c'}, {age:25, name:'a'} {age:100, name:'b'}
-console.log(myObject.myFilter('age'));
+console.log(myObject.myFilter("age"));
 
 // {age:25, name:a}, {age:100, name: b} ...
-console.log(myObject.myFilter('name'));
-
+console.log(myObject.myFilter("name"));
 
 /*
  * TASK 3
@@ -115,13 +111,13 @@ console.log(myObject.myFilter('name'));
  */
 let arr1 = [1, false, 2, 0, 3, null, 0, 4, 0, 25];
 let arr2 = [
-  'a',
+  "a",
   0,
   0,
-  'b',
+  "b",
   null,
-  'c',
-  'd',
+  "c",
+  "d",
   0,
   1,
   false,
@@ -141,14 +137,15 @@ let arr2 = [
   9
 ];
 
-
 function moveZeroToEnd(arr) {
-	let zeroArray = [];
-	let noZeroArray = [];
+  let zeroArray = [];
+  let noZeroArray = [];
 
-	arr.forEach((elem) => (elem === 0 ? zeroArray.push(elem) : noZeroArray.push(elem)));
+  arr.forEach(
+    elem => (elem === 0 ? zeroArray.push(elem) : noZeroArray.push(elem))
+  );
 
-	return noZeroArray.concat(zeroArray);;
+  return noZeroArray.concat(zeroArray);
 }
 console.log(moveZeroToEnd(arr1));
 console.log(moveZeroToEnd(arr2));
@@ -162,15 +159,16 @@ console.log(moveZeroToEnd(arr2));
  */
 
 function capMe(arr) {
-
-  return arr.map(function(elem){
-    return elem.slice(0,1).toUpperCase().concat(elem.toLowerCase().slice(1));
-  })
+  return arr.map(function(elem) {
+    return elem
+      .slice(0, 1)
+      .toUpperCase()
+      .concat(elem.toLowerCase().slice(1));
+  });
 }
 
-console.log(capMe(['jo', 'nelson', 'jurie']));
-console.log(capMe(['KARLY', 'DANIEL', 'KELSEY']));
-
+console.log(capMe(["jo", "nelson", "jurie"]));
+console.log(capMe(["KARLY", "DANIEL", "KELSEY"]));
 
 ////// @ TODO -- LVL Strong Junior
 
@@ -198,25 +196,25 @@ let junior = {};
 
 function addMethod(object, name, fn) {
   let paramCount = [...arguments].length;
-  object[name] = function(...args){
-    if([...args].length == paramCount){
+  object[name] = function(...args) {
+    if ([...args].length == paramCount) {
       return object[name];
     }
   };
   return fn();
 }
 
-addMethod(junior, 'ok', function() {
-  console.log('zero arguments');
+addMethod(junior, "ok", function() {
+  console.log("zero arguments");
 });
-addMethod(junior, 'ok', function(one) {
-  console.log('one arguments');
+addMethod(junior, "ok", function(one) {
+  console.log("one arguments");
 });
-addMethod(junior, 'ok', function(one, two) {
-  console.log('two arguments');
+addMethod(junior, "ok", function(one, two) {
+  console.log("two arguments");
 });
-addMethod(junior, 'ok', function(one, two, three) {
-  console.log('three arguments');
+addMethod(junior, "ok", function(one, two, three) {
+  console.log("three arguments");
 });
 
 junior.ok(1, 2, 3); // 'three arguments'
