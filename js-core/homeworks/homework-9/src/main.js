@@ -23,7 +23,7 @@ let developer2 = {
   goodDev: goodDev
 };
 
-function goodDev() {
+ function goodDev() {
   let skillsArray = [];
   let needSkilsArray = [...this.requirements];
   console.log("...");
@@ -31,12 +31,10 @@ function goodDev() {
     skillsArray = [...this.skills];
   }
   if (this.experience) {
-    skillsArray = this.experience.map(function(elem) {
-      return (elem = elem.technology);
-    });
+    skillsArray = this.experience.map((elem) => (elem = elem.technology));
   }
 
-  return needSkilsArray.forEach(function(value) {
+  return needSkilsArray.forEach((value) => {
     if (skillsArray.indexOf(value) != -1) {
       console.log(`required: ${value}... success`);
     } else {
@@ -80,11 +78,9 @@ let myObject = {
   ]
 };
 
-myObject.myFilter = function(param) {
+myObject.myFilter = function(param){
   let obj = { ...this, database: [...this.database] };
-  return obj.database.sort(function(a, b) {
-    return a[param] > b[param];
-  });
+  return obj.database.sort((a, b) => (a[param] > b[param]));
 };
 
 // {age:15, name:'c'}, {age:25, name:'a'} {age:100, name:'b'}
@@ -137,7 +133,7 @@ let arr2 = [
   9
 ];
 
-function moveZeroToEnd(arr) {
+const moveZeroToEnd = (arr) => {
   let zeroArray = [];
   let noZeroArray = [];
 
@@ -147,6 +143,7 @@ function moveZeroToEnd(arr) {
 
   return noZeroArray.concat(zeroArray);
 }
+
 console.log(moveZeroToEnd(arr1));
 console.log(moveZeroToEnd(arr2));
 
@@ -158,14 +155,19 @@ console.log(moveZeroToEnd(arr2));
  capMe(['KARLY', 'DANIEL', 'KELSEY']) // returns ['Karly', 'Daniel', 'Kelsey']
  */
 
-function capMe(arr) {
-  return arr.map(function(elem) {
-    return elem
+const capMe = (arr) => (
+  arr.map((elem) => (
+    elem
       .slice(0, 1)
       .toUpperCase()
-      .concat(elem.toLowerCase().slice(1));
-  });
-}
+      .concat(
+        elem
+          .toLowerCase()
+          .slice(1)
+      )
+    )
+  )
+)
 
 console.log(capMe(["jo", "nelson", "jurie"]));
 console.log(capMe(["KARLY", "DANIEL", "KELSEY"]));
@@ -194,10 +196,10 @@ let junior = {};
 
 // fn.length == arguments.length
 
-function addMethod(object, name, fn) {
+const addMethod = (object, name, fn) => {
   object[name] = function() {
     if (fn.length == arguments.length) {
-      return object[name];
+      return fn;
     }
   };
   return fn();
