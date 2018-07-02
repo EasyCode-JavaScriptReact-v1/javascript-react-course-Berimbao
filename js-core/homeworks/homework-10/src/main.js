@@ -28,7 +28,6 @@ console.log(z(x)); // что вернет
 
 //undefined - так как t ничего не возвращает
 
-
 /*
  *
  * TASK 1
@@ -38,10 +37,10 @@ console.log(z(x)); // что вернет
  *
  * */
 
-let $ = (tag) => `<${tag}></${tag}>`
+let $ = tag => `<${tag}></${tag}>`;
 
-let createBODY = $('body');
-let createDIV = $('div');
+let createBODY = $("body");
+let createDIV = $("div");
 console.log(createBODY); // <body></body>
 console.log(createDIV); // <div></div>
 
@@ -56,23 +55,19 @@ console.log(createDIV); // <div></div>
  *  Передаваемые аргументы должны быть только в виде строки
  * */
 
-
-
 var ezjQueryBase = {
-  tags:'',
-  add:function(str){
-    ezjQueryBase.tags = ezjQueryBase.tags+`<${str}></${str}>` 
+  tags: "",
+  add: function(str) {
+    ezjQueryBase.tags = ezjQueryBase.tags + `<${str}></${str}>`;
     console.log(ezjQueryBase.tags);
     return this;
   }
 };
 
-
-
 ezjQueryBase
-  .add('body') // <body></body>
-  .add('div') // <body></body><div></div>
-  .add('h1') // <body></body><div></div><h1></h1>
+  .add("body") // <body></body>
+  .add("div") // <body></body><div></div>
+  .add("h1"); // <body></body><div></div><h1></h1>
 
 /*
  *
@@ -88,43 +83,46 @@ ezjQueryBase
  *
  */
 var ezjQuery = {
-  tags:'',
-  add:function(...arg){
+  tags: "",
+  add: function(...arg) {
     let tag = [...arg][0];
     let tagContent = [...arg][1];
-    let newTagPosition = ezjQuery.tags.indexOf('</');  
-    let str = tagContent ? `<${tag}>${tagContent}</${tag}>`:`<${tag}></${tag}>`;
+    let newTagPosition = ezjQuery.tags.indexOf("</");
+    let str = tagContent
+      ? `<${tag}>${tagContent}</${tag}>`
+      : `<${tag}></${tag}>`;
 
-    if(newTagPosition !=-1){
-      ezjQuery.tags = ezjQuery.tags.slice(0,newTagPosition)+str+ezjQuery.tags.slice(newTagPosition);
-      console.log(ezjQuery.tags);
-    }else{
-      ezjQuery.tags = str 
-      console.log(ezjQuery.tags);  
+    if (newTagPosition != -1) {
+      ezjQuery.tags =
+        ezjQuery.tags.slice(0, newTagPosition) +
+        str +
+        ezjQuery.tags.slice(newTagPosition);
+    } else {
+      ezjQuery.tags = str;
     }
     return this;
   },
-  render:function(){
-    this.tags = '';
-    return this
+  render: function() {
+    let result = ezjQuery.tags;
+    ezjQuery.tags = "";
+    return result;
   }
-  
 };
 // example
 var helloList = ezjQuery
-  .add('body') // <body></body>
-  .add('div') // <body><div></div></body>
-  .add('ul') // <body><div><ul></ul></div></body>
-  .add('li', 'Hello') //<body><div><ul><li>Hello</li></ul></div></body>
-  .render()
-  .add('body').add('ul') // <body><div><ul></ul></div></body>;
+  .add("body") // <body></body>
+  .add("div") // <body><div></div></body>
+  .add("ul") // <body><div><ul></ul></div></body>
+  .add("li", "Hello") //<body><div><ul><li>Hello</li></ul></div></body>
+  .render();
+
 console.log(helloList); // <body><div><ul><li>Hello</li></ul></div></body>
 //  Обратите внимание, что после вызова render создание строки началось сначала
 
 var bodyDiv = ezjQuery
-  //.add('body') //<body></body>
-  //.add('div') //<body><div></div></body>
-  //.render();
+  .add("body") //<body></body>
+  .add("div") //<body><div></div></body>
+  .render();
 console.log(bodyDiv); //<body><div></div></body>
 
 // Для выполнивших все задания
