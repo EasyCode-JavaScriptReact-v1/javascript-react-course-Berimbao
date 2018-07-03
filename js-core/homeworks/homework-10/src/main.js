@@ -58,8 +58,8 @@ console.log(createDIV); // <div></div>
 var ezjQueryBase = {
   tags: "",
   add: function(str) {
-    ezjQueryBase.tags = ezjQueryBase.tags + `<${str}></${str}>`;
-    console.log(ezjQueryBase.tags);
+    this.tags = this.tags + `<${str}></${str}>`;
+    console.log(this.tags);
     return this;
   }
 };
@@ -85,8 +85,8 @@ ezjQueryBase
 var ezjQuery = {
   tags: "",
   add: function(...arg) {
-    let tag = [...arg][0];
-    let tagContent = [...arg][1];
+    let tag = arg[0];
+    let tagContent = arg[1];
     let newTagPosition = ezjQuery.tags.indexOf("</");
     let str = tagContent
       ? `<${tag}>${tagContent}</${tag}>`
