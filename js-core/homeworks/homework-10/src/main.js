@@ -87,11 +87,10 @@ var ezjQuery = {
   add: function(...arg) {
     let tag = arg[0];
     let tagContent = arg[1];
-    let newTagPosition = ezjQuery.tags.indexOf("</");
+    let newTagPosition = ezjQuery.tags.indexOf("></")+1;
     let str = tagContent
       ? `<${tag}>${tagContent}</${tag}>`
       : `<${tag}></${tag}>`;
-
     if (newTagPosition != -1) {
       ezjQuery.tags =
         ezjQuery.tags.slice(0, newTagPosition) +
@@ -114,7 +113,9 @@ var helloList = ezjQuery
   .add("div") // <body><div></div></body>
   .add("ul") // <body><div><ul></ul></div></body>
   .add("li", "Hello") //<body><div><ul><li>Hello</li></ul></div></body>
-  .render();
+  .add ('div', '<div> lallal </ div>'). add ('main', '</> __ </>')
+  .render()
+ //.add ('div', '<div> lallal </ div>'). add ('main', '</> __ </>');
 
 console.log(helloList); // <body><div><ul><li>Hello</li></ul></div></body>
 //  Обратите внимание, что после вызова render создание строки началось сначала
