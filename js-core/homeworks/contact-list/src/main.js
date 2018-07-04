@@ -2,10 +2,11 @@ function PhoneApp() {
   this.database = [];
 }
 
-PhoneApp.prototype.addUser = function(id, options) {
-  let user = {
-    id: id
-  };
+PhoneApp.prototype.addUser = function(options) {
+  let user = {};
+
+  user.id = this.database.length > 0 ? this.database.length + 1 : 1;
+
   if (options.name) {
     user.name = options.name;
   }
@@ -96,10 +97,8 @@ PhoneApp.prototype.filterUser = function(param) {
 PhoneApp.prototype.sortUser = function(param, direction) {
   return this.database.sort((a, b) => {
     if (direction) {
-      if (direction == "big") {
-        return a[param] > b[param];
-      }
-      if (direction == "small") return a[param] < b[param];
+      if (direction == "big") { return a[param] < b[param]; }
+      if (direction == "small") { return a[param] > b[param]; }
     } else {
       return a[param] > b[param];
     }
@@ -107,28 +106,29 @@ PhoneApp.prototype.sortUser = function(param, direction) {
 };
 
 const myPhoneApp = new PhoneApp();
-myPhoneApp.addUser(1, {
+myPhoneApp.addUser({
   name: "Vasya",
   phone: "123456789",
   homePhone: "11111"
 });
-myPhoneApp.addUser(2, { name: "Petja", phone: "123456798" });
-myPhoneApp.addUser(3, { name: "Brigitte", phone: "123457689" });
-myPhoneApp.addUser(4, { name: "Tracer", phone: "123546789" });
-myPhoneApp.addUser(5, {
+myPhoneApp.addUser({ name: "Petja", phone: "123456798" });
+myPhoneApp.addUser({ name: "Brigitte", phone: "123457689" });
+myPhoneApp.addUser({ name: "Tracer", phone: "123546789" });
+myPhoneApp.addUser({
   name: "Anduin",
   phone: "113456789",
-  homePhone: "535353a"
+  homePhone: "535353"
 });
-myPhoneApp.addUser(6, { name: "Torgrim", phone: "321456789" });
-myPhoneApp.addUser(7, {
+myPhoneApp.addUser({ name: "Torgrim", phone: "321456789" });
+myPhoneApp.addUser({
   name: "Anduin",
   phone: "113451189",
   homePhone: "222222"
 });
 
+console.log(myPhoneApp);
 console.log(myPhoneApp.searchUserByName("Anduin"));
 myPhoneApp.editUser(2, { name: "Voljin" });
 console.log(myPhoneApp.filterUser("homePhone"));
-console.log(myPhoneApp.sortUser("name", "big"));
+console.log(myPhoneApp.sortUser("homePhone", "big"));
 console.log(myPhoneApp.checkAndFormatPhoneNumber("0993378130"));
