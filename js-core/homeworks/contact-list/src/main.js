@@ -5,7 +5,7 @@ function PhoneApp() {
 PhoneApp.prototype.addUser = function(options) {
   let user = {};
 
-  user.id = this.database.length > 0 ? this.database.length + 1 : 1;
+  user.id = this.database.length + 1;
 
   if (options.name) {
     user.name = options.name;
@@ -97,10 +97,14 @@ PhoneApp.prototype.filterUser = function(param) {
 PhoneApp.prototype.sortUser = function(param, direction) {
   return this.database.sort((a, b) => {
     if (direction) {
-      if (direction == "big") { return a[param] < b[param]; }
-      if (direction == "small") { return a[param] > b[param]; }
+      if (direction == "big") {
+        return a[param] < b[param];
+      }
+      if (direction == "small") {
+        return a[param] > b[param];
+      }
     } else {
-      return a[param] > b[param];
+      return a.id > b.id;
     }
   });
 };
@@ -129,6 +133,7 @@ myPhoneApp.addUser({
 console.log(myPhoneApp);
 console.log(myPhoneApp.searchUserByName("Anduin"));
 myPhoneApp.editUser(2, { name: "Voljin" });
+myPhoneApp.editUser(4, { homePhone: "159357" });
 console.log(myPhoneApp.filterUser("homePhone"));
-console.log(myPhoneApp.sortUser("homePhone", "big"));
-console.log(myPhoneApp.checkAndFormatPhoneNumber("0993378130"));
+console.log(myPhoneApp.sortUser("phone", "big"));
+// console.log(myPhoneApp.checkAndFormatPhoneNumber("0993378130"));
