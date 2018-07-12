@@ -69,7 +69,7 @@ student.watchFilms()
 
 class DataBase {
   constructor() {
-    this.interval = 0;
+    let interval = 0;
     this.query = function() {
       let counter = 5;
       if (this.interval > 0) {
@@ -113,3 +113,7 @@ dataBase.query();
 // 2
 // 1
 // console.log('The web server is down')
+
+
+
+
