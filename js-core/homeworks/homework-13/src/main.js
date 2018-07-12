@@ -41,7 +41,7 @@ let worker = new Worker({
   workPlace: "forest",
   salary: "food"
 });
-worker.work()
+worker.work();
 
 let student = new Student({
   name: "Ork Student",
@@ -52,7 +52,7 @@ let student = new Student({
   school: "Orgrimar Higth School",
   grant: "food"
 });
-student.watchFilms()
+student.watchFilms();
 
 /*
  * Вы должны создать имитацию медленной базы данных.
@@ -70,15 +70,17 @@ student.watchFilms()
 class DataBase {
   constructor() {
     let interval = 0;
-    this.query = function() {
+    this.query = () => {
       let counter = 5;
       if (this.interval > 0) {
         clearInterval(this.interval);
       }
+
       let interval = setInterval(() => {
         this.interval = interval;
         console.log(counter);
         counter--;
+
         if (counter == 0) {
           clearInterval(interval);
           console.log("The web server is down");
@@ -113,7 +115,3 @@ dataBase.query();
 // 2
 // 1
 // console.log('The web server is down')
-
-
-
-
