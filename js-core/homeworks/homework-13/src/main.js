@@ -19,7 +19,9 @@ class Worker extends Human {
     super(options);
     this.workPlace = options.workPlace;
     this.salary = options.salary;
-    this.work = () => console.log(`Job's done!`);
+  }
+  work(){
+    console.log(`Job's done!`);
   }
 }
 
@@ -28,7 +30,9 @@ class Student extends Human {
     super(options);
     this.school = options.school;
     this.grant = options.grant;
-    this.watchFilms = () => console.log(`Nice one!`);
+  }
+  watchFilms(){
+    console.log(`Nice one!`);
   }
 }
 
