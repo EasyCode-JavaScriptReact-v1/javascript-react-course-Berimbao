@@ -8,32 +8,33 @@ TASK 0. Найдите числа которые повторяются нече
   solution([2, 2, 44, 44]) => []
 */
 
-function dublicateNubers(arr) {
-  let resulrArr = [];
-  let obj = {};
+function solution(arr) {
+//  let resulrArr = [];
 
-  arr.forEach(elem => {
-    if (!obj[elem]) {
-      obj[elem] = 1;
+  let obj = arr.reduce((newElem,elem) => {
+    if (!newElem[elem]) {
+      newElem[elem] = 1;
     } else {
-      obj[elem] = obj[elem] + 1;
+      newElem[elem] = newElem[elem] + 1;
     }
-  });
+    return newElem
+  },{})
 
-  Object.keys(obj).forEach(elem => {
+  let resulrArr = Object.keys(obj).reduce((newElem,elem) => {
     if (obj[elem] % 2 != 0) {
-      resulrArr.push(elem);
-    }
-  });
+      return newElem.concat(elem);
+    } 
+    return newElem
+  },[])
 
   console.log(resulrArr);
 }
 
-dublicateNubers([12, 23, 34, 12, 12, 23, 12, 45]);
-dublicateNubers([4, 4, 100, 5000, 4, 4, 4, 4, 4, 100, 100]);
-dublicateNubers([3, 3, 4, 6, 4, 5, 9, 9, 21, 9]);
-dublicateNubers([4, 8, 15, 16, 23, 42, 4, 15, 42, 42]);
-dublicateNubers([2, 2, 44, 44]);
+solution([12, 23, 34, 12, 12, 23, 12, 45]);
+solution([4, 4, 100, 5000, 4, 4, 4, 4, 4, 100, 100]);
+solution([3, 3, 4, 6, 4, 5, 9, 9, 21, 9]);
+solution([4, 8, 15, 16, 23, 42, 4, 15, 42, 42]);
+solution([2, 2, 44, 44]);
 
 let solution1;
 
@@ -93,33 +94,45 @@ let variantsArr = [
 ];
 let questionsArr = ["Вопрос 1", "Вопрос 2", "Вопрос 3"];
 
-function render(questionsArr, variantsArr) {
-  questionsArr.forEach(val => {
-    let div = document.createElement("div");
-    let ul = document.createElement("ul");
-    ul.textContent = val;
-    variantsArr.forEach(val => {
-      let li = document.createElement("li");
-      let checkbox = document.createElement("input");
-      let span = document.createElement('span');
-      checkbox.setAttribute("type", "checkbox");
-      span.textContent = val;
-      li.appendChild(checkbox);
-      li.appendChild(span);
-      ul.appendChild(li);
-    });
-    div.setAttribute("class", "test__question");
-    div.appendChild(ul);
-    document.body.appendChild(div);
-  });
+class DomApp{
+  constructor(questionsArr,variantsArr){
+    this.questionsArr = questionsArr
+    this.variantsArr = variantsArr
+    this.buttonDiv = document.createElement("div");
+    this.button = document.createElement("button");
+  }
 
-  let buttonDiv = document.createElement("div");
-  let button = document.createElement("button");
-  buttonDiv.setAttribute("class", "center");
-  button.textContent = "Проверить мои результаты";
-  buttonDiv.appendChild(button);
-  document.body.appendChild(buttonDiv);
+  render() {
+    this.questionsArr.forEach(val => {
+      let div = document.createElement("div");
+      let ul = document.createElement("ul");
+      div.setAttribute("class", "test__question");
+      ul.textContent = val;
+      this.variantsArr.forEach(val => {
+        let li = document.createElement("li");
+        let checkbox = document.createElement("input");
+        let span = document.createElement('span');
+        checkbox.setAttribute("type", "checkbox");
+        span.textContent = val;
+        li.appendChild(checkbox);
+        li.appendChild(span);
+        ul.appendChild(li);
+      });
+      
+      div.appendChild(ul);
+      document.body.appendChild(div);
+    });
+  
+
+    this.buttonDiv.setAttribute("class", "center");
+    this.button.textContent = "Проверить мои результаты";
+    this.buttonDiv.appendChild(this.button);
+    document.body.appendChild(this.buttonDiv);
+  }
 }
 
-render(questionsArr, variantsArr);
+let app = new DomApp(questionsArr,variantsArr)
+
+
+app.render();
 // app.render();
