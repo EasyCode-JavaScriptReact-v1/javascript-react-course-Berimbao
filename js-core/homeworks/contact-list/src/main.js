@@ -57,8 +57,8 @@ class PhoneApp{
         this.database.splice(index, 1);
       }
     });
-    this.database.splice();
   };
+
   searchUserByName(name) {
     return this.database.reduce(function(newElem, elem) {
       if (elem.name == name) {
@@ -67,6 +67,7 @@ class PhoneApp{
       return newElem;
     }, []);
   };
+
   editUser(id, options) {
     this.database.map(elem => {
       if (elem.id == id) {
@@ -132,6 +133,95 @@ let anduin2 = new User({
   phone: "113451189",
   homePhone: "222222"
 })
+let user = new User({
+  name: "User",
+  phone: "113451189",
+  homePhone: "222222"
+})
+let name = new User({
+  name: "Name",
+  phone: "113451189",
+  homePhone: "222222"
+})
+let someUaser = new User({
+  name: "someUaser",
+  phone: "113451189",
+  homePhone: "222222"
+})
+let blabla = new User({
+  name: "blabla",
+  phone: "113451189",
+  homePhone: "222222"
+})
+
+class App{
+  constructor(){
+    this.baseBlock = document.querySelector('.contact-table');
+  }
+
+  createUsersList(users){
+    users.database.forEach(elem => {
+      this.render(this.createUserTR(elem))
+    })
+  }
+
+  createUserTR(user){
+    let tr = this.newElem('tr');
+    tr.className = 'borderdered';
+
+    let avatarTD = this.newElem('td');
+    let infoTD = this.newElem('td');
+    let buttonTD = this.newElem('td');
+
+    avatarTD.className = 'app-contact-avatar'
+    infoTD.className = 'app-contact-name'
+    buttonTD.className = 'app-contact-buttons'
+
+    let p_name = this.newElem('p')
+    p_name.textContent = user.name
+    let p_phone = this.newElem('p')
+    p_phone.textContent = user.phone
+
+    let avatarDIV = this.newElem('div')
+    avatarDIV.className = 'round-avatar'
+
+    let avatarImg = this.newElem('img');
+    avatarImg.setAttribute('src','img/avatar-2.png')
+
+    let editA = this.newElem('a');
+    editA.setAttribute('href','#');
+    editA.className = 'icon-link';
+    
+    let editIconAwesome = this.newElem('i');
+    editIconAwesome.classList.add('far','fa-edit');
+
+    editA.appendChild(editIconAwesome);
+    buttonTD.appendChild(editA);
+
+    infoTD.appendChild(p_name)
+    infoTD.appendChild(p_phone)
+
+    avatarDIV.appendChild(avatarImg)
+    avatarTD.appendChild(avatarDIV)
+
+    tr.appendChild(avatarTD);
+    tr.appendChild(infoTD)
+    tr.appendChild(buttonTD)
+
+    return tr
+  }
+
+  render(elem){
+    this.baseBlock.appendChild(elem)
+  }
+
+  newElem(elem){
+    return document.createElement(elem);
+  }
+}
+
+let app = new App()
+
 
 const myPhoneApp = new PhoneApp();
 myPhoneApp.addUser(vasya);
@@ -141,11 +231,18 @@ myPhoneApp.addUser(tracer);
 myPhoneApp.addUser(anduin);
 myPhoneApp.addUser(torgrim);
 myPhoneApp.addUser(anduin2);
+myPhoneApp.addUser(user);
+myPhoneApp.addUser(name);
+myPhoneApp.addUser(someUaser);
+myPhoneApp.addUser(blabla);
 
-console.log(myPhoneApp);
-console.log(myPhoneApp.searchUserByName("Anduin"));
-myPhoneApp.editUser(2, { name: "Voljin" });
-myPhoneApp.editUser(4, { homePhone: "159357" });
-console.log(myPhoneApp.filterUser("homePhone"));
-console.log(myPhoneApp.sortUser("phone", "big"));
+console.log(app.createUsersList(myPhoneApp))
+console.log(myPhoneApp)
+
+// console.log(myPhoneApp);
+// console.log(myPhoneApp.searchUserByName("Anduin"));
+// myPhoneApp.editUser(2, { name: "Voljin" });
+// myPhoneApp.editUser(4, { homePhone: "159357" });
+// console.log(myPhoneApp.filterUser("homePhone"));
+// console.log(myPhoneApp.sortUser("phone", "big"));
 // console.log(myPhoneApp.checkAndFormatPhoneNumber("0993378130"));
