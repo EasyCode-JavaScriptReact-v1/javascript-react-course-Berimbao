@@ -6,6 +6,7 @@ class PhoneApp{
   addUser (options) {
     let user = {};
     user.id = this.database.length + 1;
+    user.avatar = options.avatar || "avatar-2"
   
     if (options.name) {
       user.name = options.name;
@@ -111,6 +112,7 @@ class User{
     this.name = options.name
     this.phone = options.phone
     this.homePhone = options.homePhone
+    this.avatar = options.avatar
   }
 }
 
@@ -120,14 +122,14 @@ let vasya = new User({
   homePhone: "11111"
 })
 let petja = new User({ name: "Petja", phone: "123456798" })
-let brigitte = new User({ name: "Brigitte", phone: "123457689" })
+let brigitte = new User({ name: "Brigitte", phone: "123457689", avatar:"girl-1" })
 let tracer = new User({ name: "Tracer", phone: "123546789" })
 let anduin = new User({
   name: "Anduin",
   phone: "113456789",
   homePhone: "535353"
 })
-let torgrim = new User({ name: "Torgrim", phone: "321456789" })
+let torgrim = new User({ name: "Torgrim", phone: "321456789", avatar:"man-2" })
 let anduin2 = new User({
   name: "Anduin",
   phone: "113451189",
@@ -156,7 +158,7 @@ let blabla = new User({
 
 class App{
   constructor(){
-    this.baseBlock = document.querySelector('.contact-table');
+    this.baseBlock = document.querySelector(".contact-table");
   }
 
   createUsersList(users){
@@ -166,34 +168,34 @@ class App{
   }
 
   createUserTR(user){
-    let tr = this.newElem('tr');
-    tr.className = 'borderdered';
+    let tr = this.newElem("tr");
+    tr.className = "borderdered";
 
-    let avatarTD = this.newElem('td');
-    let infoTD = this.newElem('td');
-    let buttonTD = this.newElem('td');
+    let avatarTD = this.newElem("td");
+    let infoTD = this.newElem("td");
+    let buttonTD = this.newElem("td");
 
-    avatarTD.className = 'app-contact-avatar'
-    infoTD.className = 'app-contact-name'
-    buttonTD.className = 'app-contact-buttons'
+    avatarTD.className = "app-contact-avatar"
+    infoTD.className = "app-contact-name"
+    buttonTD.className = "app-contact-buttons"
 
-    let p_name = this.newElem('p')
+    let p_name = this.newElem("p")
     p_name.textContent = user.name
-    let p_phone = this.newElem('p')
+    let p_phone = this.newElem("p")
     p_phone.textContent = user.phone
 
-    let avatarDIV = this.newElem('div')
-    avatarDIV.className = 'round-avatar'
+    let avatarDIV = this.newElem("div")
+    avatarDIV.className = "round-avatar"
 
-    let avatarImg = this.newElem('img');
-    avatarImg.setAttribute('src','img/avatar-2.png')
+    let avatarImg = this.newElem("img");
+    avatarImg.setAttribute("src","img/"+user.avatar+".png")
 
-    let editA = this.newElem('a');
-    editA.setAttribute('href','#');
-    editA.className = 'icon-link';
+    let editA = this.newElem("a");
+    editA.setAttribute("href","#");
+    editA.className = "icon-link";
     
-    let editIconAwesome = this.newElem('i');
-    editIconAwesome.classList.add('far','fa-edit');
+    let editIconAwesome = this.newElem("i");
+    editIconAwesome.classList.add("far","fa-edit");
 
     editA.appendChild(editIconAwesome);
     buttonTD.appendChild(editA);
@@ -239,10 +241,3 @@ myPhoneApp.addUser(blabla);
 console.log(app.createUsersList(myPhoneApp))
 console.log(myPhoneApp)
 
-// console.log(myPhoneApp);
-// console.log(myPhoneApp.searchUserByName("Anduin"));
-// myPhoneApp.editUser(2, { name: "Voljin" });
-// myPhoneApp.editUser(4, { homePhone: "159357" });
-// console.log(myPhoneApp.filterUser("homePhone"));
-// console.log(myPhoneApp.sortUser("phone", "big"));
-// console.log(myPhoneApp.checkAndFormatPhoneNumber("0993378130"));

@@ -68,8 +68,14 @@ div.app-header, div.app-footer{
 tr td{
     border-bottom: 1px solid #858585;
 }
+tr:hover td{
+    height: 90px;
+    border-top: 2px solid #858585;
+    border-bottom: 3px solid #858585;
+}
 tr:hover{
     background-color: #f1f1f1;
+    
 }
 .round-avatar{
     overflow:hidden;
