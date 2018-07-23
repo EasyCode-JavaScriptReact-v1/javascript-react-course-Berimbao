@@ -64,19 +64,53 @@ let blabla = new User({
 
 class App{
   constructor(){
-    this.baseBlock = document.querySelector(".contact-table");
+    this.baseBlock = document.querySelector(".main")
+	this.body = document.body;
   }
-
+  
+ createHeader(){
+	return `
+		<div class="app-header">
+			My Phone App
+		</div>
+	`
+  }
+  createFooter(){
+	 return `
+		<div class="app-footer">
+			<div></div>
+		</div>
+	`
+  }
+  createContentBlock(){
+	return `<div class="app-content">
+        <table class="contact-table" cellspacing="0" cellpadding="0">                      
+        </table>       
+    </div>`
+  }
+  createStructure(){	
+	document.body.innerHTML =`
+	<div class="main">
+		${this.createHeader()}
+		${this.createContentBlock()}
+		${this.createFooter()}
+	</div>
+	`
+  }
+  
+  render(users){
+	this.createStructure();
+	this.createUsersList(users);
+	console.log(this.tableBlock)
+  }
+  
   createUsersList(users){
+	let tableBlock = document.querySelector(".contact-table");
     users.database.forEach(elem => {
-      this.render(this.createUserTR(elem))
+      tableBlock.innerHTML += this.createUserTR(elem)
     })
   }
   
-  render(elem){
-    this.baseBlock.innerHTML += elem
-  }
-
   createUserTR(user){	
 	return `
 		<tr class="borderdered" onclick="window.location.href = 'contact.html'">
@@ -97,6 +131,11 @@ class App{
 		</tr>
 	`
   }
+   renderUsersList(elem){	
+    this.tableBlock.innerHTML += elem
+  }
+
+
 }
 
 let app = new App()
@@ -114,5 +153,11 @@ myPhoneApp.addUser(name);
 myPhoneApp.addUser(someUaser);
 myPhoneApp.addUser(blabla);
 
-console.log(app.createUsersList(myPhoneApp))
-console.log(myPhoneApp)
+
+console.log(app.createHeader())
+console.log(app.createContentBlock())
+console.log(app.createFooter())
+
+app.render(myPhoneApp)
+
+
