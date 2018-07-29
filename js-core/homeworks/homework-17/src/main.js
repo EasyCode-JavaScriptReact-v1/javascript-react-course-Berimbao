@@ -40,50 +40,50 @@ console.log(solution([12, 12, 12])); // [5, 4]
  * */
 
 class Carousel {
-  constructor(){
+  constructor() {
     this.nextBtn = document.getElementById("next")
     this.prevBtn = document.getElementById("prev")
     this.imgContainer = document.getElementsByClassName("img-block")[0]
     this.navContainer = document.getElementById("position-info")
-    this.currentPosition = 1 
+    this.currentPosition = 1
     this.imgWidth = 300
     this.nextBtn.onclick = () => this.goToNextImg()
     this.prevBtn.onclick = () => this.goToPrevImg()
     this.writePosition()
   }
 
-  getElementCount(){
+  getElementCount() {
     let elemCount = document.querySelectorAll(".img-block img");
-    return elemCount.length 
+    return elemCount.length
   }
 
-  goToNextImg(){
-    if(this.currentPosition<3){
-      this.currentPosition ++;  
+  goToNextImg() {
+    if (this.currentPosition < this.getElementCount()) {
+      this.currentPosition++;
       let padding = (this.imgWidth * this.currentPosition) - this.imgWidth
-      this.imgContainer.style.marginLeft = `-${padding}px`   
-    }else{
+      this.imgContainer.style.marginLeft = `-${padding}px`
+    } else {
       this.imgContainer.style.marginLeft = "0px"
-      this.currentPosition = 1; 
+      this.currentPosition = 1;
     }
     this.writePosition()
   }
-  goToPrevImg(){ 
-    if(this.currentPosition>1){
-      this.currentPosition --;     
-      let padding = (this.imgWidth * this.currentPosition) - this.imgWidth  
-      this.imgContainer.style.marginLeft = `-${padding}px`      
-    }else{
-      this.currentPosition  = 3;
-      let padding = (this.imgWidth * this.currentPosition) - this.imgWidth  
-      this.imgContainer.style.marginLeft = `-${padding}px`         
+  goToPrevImg() {
+    if (this.currentPosition > 1) {
+      this.currentPosition--;
+      let padding = (this.imgWidth * this.currentPosition) - this.imgWidth
+      this.imgContainer.style.marginLeft = `-${padding}px`
+    } else {
+      this.currentPosition = this.getElementCount();
+      let padding = (this.imgWidth * this.currentPosition) - this.imgWidth
+      this.imgContainer.style.marginLeft = `-${padding}px`
     }
     this.writePosition()
   }
-  writePosition(){
+  writePosition() {
     this.navContainer.innerHTML = `${this.currentPosition}/${this.getElementCount()}`
   }
-  initialize(){
+  initialize() {
 
   }
 }
