@@ -111,6 +111,27 @@ console.log(myInitializedCarousel.imgContainer)
 * background-color
 * */
 
+class Style {
+  topStyle(className, classParam) {
+    let params = Object.keys(classParam)
+    let paramsStr = ''
+    params.map(elem => {
+      paramsStr += `${elem.replace(/[A-Z]/, "-$&").toLowerCase()}:${classParam[elem]};`
+    })
+
+    document.head.innerHTML += `
+      <style>
+        .${className}{
+          ${paramsStr}
+        }
+      </style>
+    `
+  }
+}
+
+let style = new Style()
+console.log(style.topStyle('fetch', { backgroundColor: 'blue' }))
+
 /* @SUPER
  *
  * Напишите функцию которая будет преобразовывать CSS-свойство в
@@ -125,6 +146,13 @@ console.log(myInitializedCarousel.imgContainer)
  * сделать через regExp
  *
  * */
+
+function fromCSSToJS(cssParam) {
+  let letter = cssParam.match(/-([a-z])/, '$1');
+  return cssParam.replace(/-([a-z])/, letter[0].replace(/-/, '').toUpperCase());
+}
+
+console.log(fromCSSToJS("background-color"))
 
 
 /*
