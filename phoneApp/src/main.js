@@ -13,14 +13,14 @@ class PhoneApp{
   };
 }
 
-class User{
-  constructor(options){
-    this.name = options.name
-    this.phone = options.phone
-    this.homePhone = options.homePhone
-    this.avatar = options.avatar
-  }
-}
+// class User{
+//   constructor(options){
+//     this.name = options.name
+//     this.phone = options.phone
+//     this.homePhone = options.homePhone
+//     this.avatar = options.avatar
+//   }
+// }
 
 let vasya = new User({
   name: "Vasya",
@@ -88,6 +88,7 @@ class App{
         </table>       
     </div>`
   }
+
   createStructure(){	
 	document.body.innerHTML =`
 	<div class="main">
@@ -101,12 +102,12 @@ class App{
   render(users){
 	this.createStructure();
 	this.createUsersList(users);
-	console.log(this.tableBlock)
   }
   
   createUsersList(users){
+    console.log(users)
 	let tableBlock = document.querySelector(".contact-table");
-    users.database.forEach(elem => {
+    users.forEach(elem => {
       tableBlock.innerHTML += this.createUserTR(elem)
     })
   }
@@ -120,7 +121,8 @@ class App{
 				</div>
 			</td>
 			<td class="app-contact-name">
-				<p>${user.name}</p>
+				<p>${user.fullName}</p>
+				<p>${user.email}</p>
 				<p>${user.phone}</p>
 			</td>
 			<td class="app-contact-buttons">
@@ -139,6 +141,8 @@ class App{
 }
 
 let app = new App()
+let api = new Api();
+api.getAllUsers()
 
 const myPhoneApp = new PhoneApp();
 myPhoneApp.addUser(vasya);
@@ -158,6 +162,6 @@ console.log(app.createHeader())
 console.log(app.createContentBlock())
 console.log(app.createFooter())
 
-app.render(myPhoneApp)
+// app.render(api.getAllUsers())
 
 
