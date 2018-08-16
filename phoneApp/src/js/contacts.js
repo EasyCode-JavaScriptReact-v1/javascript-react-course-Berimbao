@@ -4,42 +4,36 @@ class Contacts{
 		this.body = document.body;
   }
   
- createHeader(){
-	return `
-		<div class="app-header">
-			My Phone App
-		</div>
-	`
-  }
-  createFooter(){
-	 return `
-		<div class="app-footer">
-			<div></div>
-		</div>
-	`
-  }
-  createContentBlock(){
-	return `<div class="app-content">
-        <table class="contact-table" cellspacing="0" cellpadding="0">                      
-        </table>       
-    </div>`
-  }
   
-  createStructure(){	
+  render(users){	
 	document.body.innerHTML =`
-	<div class="main">
-		${this.createHeader()}
-		${this.createContentBlock()}
-		${this.createFooter()}
-	</div>
+		<form class="form-inline search-form">
+			<div class="form-group">
+				<label class="sr-only" for="search">Search</label>
+				<input type="text" class="form-control" id= "search" placeholder="Search">
+			</div>
+		</form>
+		<table class="table table-hover contacts">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Last name</th>
+					<th>Email</th>
+				</tr>
+			</thead>
+			<tbody>
+				${createUsersListView(users)}
+			</tbody>
+		</table>
 	`
   }
   
-  render(users){
-		console.log(users)
-	this.createStructure();
-	this.createUsersList(users);
-  }
+  createUsersListView(users){
+		return `${users.map(elem => {
+			createUserTR(elem)
+		})}`
+	}
+
   
   createUsersList(users){
 	let tableBlock = document.querySelector(".contact-table");
@@ -49,23 +43,12 @@ class Contacts{
   }
   
   createUserTR(user){	
-	return `
-		<tr class="borderdered" onclick="window.location.href = 'contact.html'">
-			<td class="app-contact-avatar">
-				<div class="round-avatar">
-					<img src="img/${user.avatar}.png">
-				</div>
-			</td>
-			<td class="app-contact-name">
-				<p>${user.name}</p>
-				<p>${user.phone}</p>
-			</td>
-			<td class="app-contact-buttons">
-				<a href="contact.html?do=edit" class="icon-link">
-					<i class="far fa-edit"></i>
-				</a>
-			</td>
-		</tr>
+		return `
+			<tr>
+				<td>${user.name.split(' ')[0]}</td>
+				<td>${user.name.split(' ')[1]}</td>
+				<td>${user.email}</td>
+			</tr>
 	`
   }
    renderUsersList(elem){	

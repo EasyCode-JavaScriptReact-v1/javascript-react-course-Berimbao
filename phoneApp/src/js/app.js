@@ -1,9 +1,18 @@
-class App(){
-    constructor(model,view,controller){
+class App{
+    constructor(){
         this.state = "contacts"
-        this.model = new Model(state)
-        this.view = new View(state)
-        this.controller = new Controller(model,view)
+        this.model = new Model(this.state)
+        this.view = new View(this.state)
+        this.controller = new Controller(this.model,this.view)
+    }
+    render(){
+        this.view.createStructure()
     }
 }
+
+let app = new App()
+app.render()
+
+
+
 
