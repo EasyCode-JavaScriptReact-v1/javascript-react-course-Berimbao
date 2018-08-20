@@ -1,12 +1,11 @@
 class Contacts{
   constructor(){
-    this.baseBlock = document.querySelector(".main")
-		this.body = document.body;
+    this.baseBlock = document.querySelector(".content-block")
   }
   
   
   render(users){	
-	document.body.innerHTML =`
+		this.baseBlock.innerHTML = `
 		<form class="form-inline search-form">
 			<div class="form-group">
 				<label class="sr-only" for="search">Search</label>
@@ -22,39 +21,29 @@ class Contacts{
 				</tr>
 			</thead>
 			<tbody>
-				${createUsersListView(users)}
+				${this.createUsersListView(users)}
 			</tbody>
 		</table>
 	`
   }
   
   createUsersListView(users){
-		return `${users.map(elem => {
-			createUserTR(elem)
-		})}`
+		return users.reduce((newElem, elem) => {
+			return newElem + this.createUserTR(elem)
+		},"")
 	}
-
-  
-  createUsersList(users){
-	let tableBlock = document.querySelector(".contact-table");
-    // users.forEach(elem => {
-    //   tableBlock.innerHTML += this.createUserTR(elem)
-    // })
-  }
   
   createUserTR(user){	
 		return `
 			<tr>
-				<td>${user.name.split(' ')[0]}</td>
-				<td>${user.name.split(' ')[1]}</td>
+				<td>${user.fullName.split(' ')[0]}</td>
+				<td>${user.fullName.split(' ')[1]}</td>
 				<td>${user.email}</td>
 			</tr>
 	`
   }
-   renderUsersList(elem){	
-    this.tableBlock.innerHTML += elem
-	}
+  //  renderUsersList(elem){	
+  //   this.tableBlock.innerHTML += elem
+	// }
 }
-
-let contacts = new Contacts()
 

@@ -12,28 +12,28 @@ class View{
                 </div>
             </header>
             <main>
-                <div class="container"></div>
+                <div class="container content-block"></div>
             </main>
             <footer class="footer">
                 <div class="container bottom-radius">
                     <nav class="main-nav">
-                        <a href="index.html" class="tab active" id="menu_contacts_list">
+                        <a href="" class="tab active" id="menu_contacts_list">
                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                             <span class = "tab-text">Contacts</span>
                         </a>
-                        <a href="keypad.html" class="tab" id="menu_keypad">
+                        <a href="" class="tab" id="menu_keypad">
                             <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
                             <span class = "tab-text">Keypad</span>
                         </a>
-                        <a href="edit-contact.html" class="tab" id="menu_contact">
+                        <a href="" class="tab" id="menu_contact">
                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             <span class = "tab-text">Edit contact</span>
                         </a>
-                        <a href="user.html" class="tab" id="menu_user">
+                        <a href="" class="tab" id="menu_user">
                             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                             <span class = "tab-text">User</span>
                         </a>
-                        <a href="add-user.html" class="tab" id="menu_add_user">
+                        <a href="" class="tab" id="menu_add_user">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                             <span class = "tab-text">Add user</span>
                         </a>
