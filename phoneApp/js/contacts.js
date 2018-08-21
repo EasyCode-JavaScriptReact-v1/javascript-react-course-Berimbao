@@ -1,13 +1,13 @@
-class Contacts{
-  constructor(){
-		this.baseBlock = document.querySelector(".content-block")
-		this.baseUrl = "https://easycode-js.herokuapp.com/"
-		this.baseUser = "seko"
-			
+class Contacts {
+  constructor() {
+    this.baseBlock = document.querySelector(".content-block");
+    this.baseUrl = "https://easycode-js.herokuapp.com/";
+		this.baseUser = "seko";
+		this.users = []
 	}
-  
-  render(users){	
-			this.baseBlock.innerHTML = `
+
+  render(users) {
+    this.baseBlock.innerHTML = `
 			<form class="form-inline search-form">
 				<div class="form-group">
 					<label class="sr-only" for="search">Search</label>
@@ -26,55 +26,75 @@ class Contacts{
 					${this.createUsersListView(users)}
 				</tbody>
 			</table>
-		`
+		`;
+		this.editContactOnClickListener();
+		this.searchOnChangeListener()
   }
-  
-  createUsersListView(users){
-		return users.reduce((newElem, elem) => {
-			return newElem + this.createUserTR(elem)
-		},"")
+
+  createUsersListView(users) {
+    return users.reduce((newElem, elem) => {
+      return newElem + this.createUserTR(elem);
+    }, "");
+  }
+
+  editContactOnClickListener() {
+    let tableBlock = document.querySelector(".contacts");
+    tableBlock.addEventListener("click", function(e) {
+      let user_id = e.target.className;
+      if (user_id) {
+        let user = new User(user_id);
+      }
+    });
+	}
+	
+	searchOnChangeListener(){
+		let searchBlock = document.getElementById("search")
+		searchBlock.addEventListener("change", (e) => {
+			this.render(this.search(searchBlock.value))
+		})
 	}
 
-	editContactOnClickListener(){
-		let tableBlock = document.querySelector(".contacts")
-		tableBlock.addEventListener("click", function(e){
-			let user_id = e.target.className
-			if(user_id){
-				let user = new User("show",user_id)
+  getUsers() {
+    fetch(this.baseUrl + this.baseUser)
+      .then(response => {
+        return response.json();
+      })
+      .then(res => {
+				let result = res.users;
+				this.users = result;
+        this.render(result);
+
+      });
+	}
+	
+	search(str){
+		return this.users.filter(elem => {
+
+			let name = elem.fullName
+			let phone = elem.phone
+			let email = elem.email
+
+			if(name.search(str)!=-1){
+				return elem
+			}else if(phone.search(str)!=-1){
+				return elem
+			}else if(email.search(str)!=-1){
+				return elem
 			}
 		})
 	}
 
-	getUsers(){
-		fetch(this.baseUrl+this.baseUser)
-		.then(response => {
-				return response.json()
-		})
-		.then(res => {
-				let result = res.users         
-				this.render(result)
-				this.editContactOnClickListener()
-		})
-}
-  
-  createUserTR(user){	
-		return `
+  createUserTR(user) {
+    return `
 			<tr>
-				<td class="${user._id}">${user.fullName.split(' ')[0]}</td>
-				<td class="${user._id}">${user.fullName.split(' ')[1]}</td>
+				<td class="${user._id}">${user.fullName.split(" ")[0]}</td>
+				<td class="${user._id}">${user.fullName.split(" ")[1]}</td>
 				<td class="${user._id}">${user.email}</td>
 			</tr>
-	`
-	}
+	`;
+  }
 
-
-	
-
-	
-	
-	
-  //  renderUsersList(elem){	
+  //  renderUsersList(elem){
   //   this.tableBlock.innerHTML += elem
-	// }
+  // }
 }
-
